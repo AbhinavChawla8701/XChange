@@ -1,0 +1,213 @@
+<!-- partial:index.partial.html -->
+<div class="page-wrapper chiller-theme toggled" id="simulator">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars" onclick="resetWindowSize()"></i>
+  </a>
+  <nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+      <div class="sidebar-brand">
+        <a href="/">XChange</a>
+        <div id="close-sidebar" onclick="changeWindowSize()">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+      <div class="sidebar-header">
+        <div class="user-pic">
+          <img class="img-responsive img-rounded" src="https://ui-avatars.com/api/?name=Rushabh+Kela"
+            alt="User picture">
+        </div>
+        <div class="user-info">
+          <span class="user-name">Rushabh
+            <strong>Kela</strong>
+          </span>
+          <span class="user-role">User</span>
+          <span class="user-status">
+            <i class="fa fa-circle"></i>
+            <span>Online</span>
+          </span>
+        </div>
+      </div>
+      <!-- sidebar-header  -->
+      <div class="sidebar-search">
+        <div>
+          <div class="input-group">
+            <input type="text" class="form-control search-menu" placeholder="Search...">
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="fa fa-search" style="height: 25px; padding-top:5px" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- sidebar-search  -->
+      <div class="sidebar-menu" style="color: white;">
+        <ul>
+          <li class="header-menu">
+            <span>Information</span>
+          </li>
+
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-chart-line"></i>
+              <span>Current Buying Price </span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="#">₹ 2365.00</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-globe"></i>
+              <span>Available Balance </span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a href="#">₹ 100000.00</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="header-menu">
+            <span>Purchase</span>
+            <div class="container" style="margin-left: 5px;">
+              <input type="number" name="stockcount" id="stockcount" style="width: 90%;" class="form-control">
+            </div>
+            <span>Total Amount : </span>
+            <br>
+            <span>₹ 200.00 </span>
+            <br>
+            <div class="container" style="margin-left: 5px;">
+              <button class="btn btn-success">Buy</button>
+            </div>
+
+          </li>
+        </ul>
+      </div>
+      <!-- sidebar-menu  -->
+    </div>
+    <!-- sidebar-content  -->
+    <div class="sidebar-footer">
+      <a href="#">
+        <span>Back to Home Page</span>
+      </a>
+    </div>
+  </nav>
+  <!-- sidebar-wrapper  -->
+  <div class="float-container">
+    <div class="float-child-chart" id='chart'>
+
+    </div>
+    <div class = "float-child-line "></div>
+    <div class="float-child-news" id='news'>
+      <div class="card text-center" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Reliance Hit Worst, IT Sectors weakens</h5>
+    <p class="card-text">IT Sector</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
+<div class="card text-center" style="width: 18rem;">
+  <div class="card-body">
+     <h5 class="card-title">Reliance Hit Worst, IT Sectors weakens</h5>
+    <p class="card-text">IT Sector</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
+<div class="card text-center" style="width: 18rem;">
+  <div class="card-body">
+     <h5 class="card-title">Reliance Hit Worst, IT Sectors weakens</h5>
+    <p class="card-text">IT Sector</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+  <script>
+    function resetWindowSize() {
+      document.getElementById('simulator').style.marginLeft = "20%";
+    }
+
+    function changeWindowSize() {
+      document.getElementById('simulator').style.marginLeft = "5%";
+    }
+    resetWindowSize();
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    const chartProperties = {
+      width: 600,
+      height: 540,
+      timeScale: {
+        timeVisible: true,
+        secondsVisible: false,
+      },
+      layout: {
+        textColor: 'rgba(0, 0, 0, 0.9)',
+      },
+      grid: {
+        vertLines: {
+          color: 'rgba(197, 203, 206, 0.5)',
+        },
+        horzLines: {
+          color: 'rgba(197, 203, 206, 0.5)',
+        },
+      },
+      crosshair: {
+        mode: LightweightCharts.CrosshairMode.Normal,
+      },
+      rightPriceScale: {
+        borderColor: 'rgba(197, 203, 206, 0.8)',
+      },
+      timeScale: {
+        borderColor: 'rgba(197, 203, 206, 0.8)',
+      },
+    }
+    const domElement = document.getElementById('chart');
+    const chart = LightweightCharts.createChart(domElement, chartProperties);
+    const candleSeries = chart.addCandlestickSeries();
+
+    var cdata;
+
+    async function Chart() {
+      for (i = 1; i < 365; i++) {
+        if (i == 1) {
+          fetch(`http://localhost:9000/getdata/` + i)
+            .then(res => res.json())
+            .then(data => {
+              cdata = data.map(d => {
+                return { time: d.Date, open: parseFloat(d.Open_Price), high: parseFloat(d.High_Price), low: parseFloat(d.Low_Price), close: parseFloat(d.Close_Price) }
+              });
+              candleSeries.setData(cdata);
+            })
+            .catch(err => log(err))
+        }
+        else {
+          fetch(`http://localhost:9000/getdata/` + i)
+            .then(res => res.json())
+            .then(data => {
+              cdata = data.map(d => {
+                console.log(d.Open_Price);
+                return { time: d.Date, open: parseFloat(d.Open_Price), high: parseFloat(d.High_Price), low: parseFloat(d.Low_Price), close: parseFloat(d.Close_Price) }
+              });
+              candleSeries.setData(cdata);
+            })
+            .catch(err => log(err))
+        }
+        await sleep(500);
+      }
+    }
+    Chart();
+
+  </script>
+</div>
