@@ -113,19 +113,8 @@
   </nav>
   <!-- sidebar-wrapper  -->
   <div class="float-container">
-    <h1>TRADING TERMINAL</h1>
+    <h1>{{event}}</h1>
     <div class="float-child-chart" id='chart' style="width: 60%;">
-      <label for="startdate">Start Date: </label>
-      <input type="date" name="startdate" id="startdate">
-      &nbsp;
-      &nbsp;
-      &nbsp;
-      &nbsp;
-      &nbsp;
-      <label for="enddate">End Date: </label>
-      <input type="date" name="enddate" id="enddate">
-      <br>
-      <br>
       <label for="companies">Select Stock : </label>
       <select id="companies" class="form-select" name="companies"
         style="width: 50%; display:inline-block; margin-top:-3px">
@@ -157,10 +146,6 @@
       <br>
       <br>
     </div>
-    <br>
-      <br>
-      <br>
-      <br>
     <div class="float-child-line " ></div>
     <div class="float-child-news" id='news'>
       <div class="card text-center" style="width: 20rem;">
@@ -241,37 +226,7 @@
 
     var cdata;
     var flag = true;
-    async function Chart() {
-      for (i = 1; i < 365; i++) {
-        if (i == 1) {
-          fetch(`http://localhost:9000/getdata/` + i)
-            .then(res => res.json())
-            .then(data => {
-              cdata = data.map(d => {
-                return { time: d.Date, open: parseFloat(d.Open_Price), high: parseFloat(d.High_Price), low: parseFloat(d.Low_Price), close: parseFloat(d.Close_Price) }
-              });
-              candleSeries.setData(cdata);
-            })
-            .catch(err => log(err))
-        }
-        else {
-          fetch(`http://localhost:9000/getdata/` + i)
-            .then(res => res.json())
-            .then(data => {
-              cdata = data.map(d => {
-                return { time: d.Date, open: parseFloat(d.Open_Price), high: parseFloat(d.High_Price), low: parseFloat(d.Low_Price), close: parseFloat(d.Close_Price) }
-              });
-              candleSeries.setData(cdata);
-            })
-            .catch(err => log(err))
-        }
-        if(!flag) {
-          break;
-        }
-        await sleep(500);
-      }
-    }
-    Chart();
+    
     var b = 0;
     var avail = 100000;
     var ns = 0;
@@ -322,8 +277,8 @@
 
     async function changeChart() {
       flag = false;
-      var sd = document.getElementById('startdate').value;
-      var ed = document.getElementById('enddate').value;
+      var sd = "{{date1}}";
+      var ed = "{{date2}}";
       var stock = document.getElementById('companies').value;
 
       var d = new Date(sd);
@@ -379,6 +334,7 @@
         await sleep(2000);
       }
     }
+    changeChart();
 
 
   </script>

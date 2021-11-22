@@ -9,8 +9,18 @@ router.get('/', async (req, res) => {
   res.render('index', { title: 'XChange' });
 });
 
+router.get('/events/:date1/:date2/:event', async (req, res) => {
+  if (!req.user) {
+    res.redirect('/auth/google');
+  }
+  else {
+    res.render('events', { title: 'XChange', date1: req.params.date1, date2: req.params.date2, event : req.params.event });
+  }
+});
+
+
 router.get('/terminal', async (req, res) => {
-  if(!req.user) {
+  if (!req.user) {
     res.redirect('/auth/google');
   }
   else {
@@ -33,19 +43,19 @@ router.get('/getnews', async (req, res) => {
   var resultb = sentiment.analyze(news[b].Title);
   var resultc = sentiment.analyze(news[c].Title);
 
-  if(resulta.score > 0) {
+  if (resulta.score > 0) {
     resulta = "Positive";
   }
   else {
     resulta = "Negative";
   }
-  if(resultb.score > 0) {
+  if (resultb.score > 0) {
     resultb = "Positive";
   }
   else {
     resultb = "Negative";
   }
-  if(resultc.score > 0) {
+  if (resultc.score > 0) {
     resultc = "Positive";
   }
   else {
@@ -56,9 +66,9 @@ router.get('/getnews', async (req, res) => {
     newsa: news[a],
     newsb: news[b],
     newsc: news[c],
-    nra : resulta,
-    nrb : resultb,
-    nrc : resultc
+    nra: resulta,
+    nrb: resultb,
+    nrc: resultc
   }
 
   res.status(200).json(ret);
@@ -70,7 +80,7 @@ router.get('/getdata/:num', async (req, res) => {
 });
 
 router.get('/visual', async (req, res) => {
-  if(!req.user) {
+  if (!req.user) {
     res.redirect('/auth/google');
   }
   else {
@@ -79,13 +89,16 @@ router.get('/visual', async (req, res) => {
 });
 
 router.get('/visual/:stock', async (req, res) => {
-  if(!req.user) {
+  if (!req.user) {
     res.redirect('/auth/google');
   }
   else {
     res.render('visualization', { title: 'XChange', stockwithoutBSE: req.params.stock.toUpperCase() });
   }
 });
+
+
+
 
 
 module.exports = router;
