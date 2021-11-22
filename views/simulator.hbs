@@ -13,11 +13,12 @@
       </div>
       <div class="sidebar-header">
         <div class="user-pic">
-          <img class="img-responsive img-rounded" src="https://ui-avatars.com/api/?name={{user.name}}"
+          <img class="img-responsive img-rounded" src="https://ui-avatars.com/api/?name=Rushabh+Kela"
             alt="User picture">
         </div>
         <div class="user-info">
-          <span class="user-name">{{user.name}}
+          <span class="user-name">Rushabh
+            <strong>Kela</strong>
           </span>
           <span class="user-role">User</span>
           <span class="user-status">
@@ -84,14 +85,13 @@
             <div class="container" style="margin-left: 5px;">
               <button class="btn btn-success" onclick="buyStock()">Buy</button>
               &nbsp;&nbsp;&nbsp;
-              <button class="btn btn-danger" onclick="sellStock()">Sell</button>
+              <button class="btn btn-danger">Sell</button>
             </div>
 
           </li>
           <hr>
           <li class="header-menu">
             <span style="font-size: larger; margin-bottom:-100px;">Portfolio :</span>
-            <br>
             <span id="portfolio" style="margin-top:-100px">₹ 100000.00</span>
           </li>
           <li class="header-menu">
@@ -114,7 +114,7 @@
   <!-- sidebar-wrapper  -->
   <div class="float-container">
     <h1>TRADING TERMINAL</h1>
-    <div class="float-child-chart" id='chart' style="width: 60%;">
+    <div class="float-child-chart" id='chart'>
       <label for="startdate">Start Date: </label>
       <input type="date" name="startdate" id="startdate">
       &nbsp;
@@ -157,19 +157,16 @@
       <br>
       <br>
     </div>
-    <br>
-      <br>
-      <br>
-      <br>
     <div class="float-child-line " ></div>
     <div class="float-child-news" id='news'>
-      <div class="card text-center" style="width: 20rem;">
+      <div class="card text-center" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title" id="newsa">Sensex crashed over 1,000 points 14 times in 2020</h5>
           <p class="card-text" id="sa"></p>
           <a href="#" class="btn btn-primary" id="linka">View More</a>
         </div>
       </div>
+      <br>
       <br>
 
       <div class="card text-center" style="width: 20rem;">
@@ -180,8 +177,9 @@
         </div>
       </div>
       <br>
+      <br>
 
-      <div class="card text-center" style="width: 20rem;">
+      <div class="card text-center" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title" id="newsc">Reliance Hit Worst, IT Sectors weakens</h5>
           <p class="card-text" id="sc"></p>
@@ -208,7 +206,7 @@
     }
 
     const chartProperties = {
-      width: 700,
+      width: 600,
       height: 540,
       timeScale: {
         timeVisible: true,
@@ -278,9 +276,9 @@
     var curr_date = "";
     function buyStock() {
       var num = Number(document.getElementById('stockcount').value);
+      ns += num;
       var f = confirm("Buy Stock\nTotal Amount: " + "₹ " + (num*Number(document.getElementById('cbp').innerHTML.slice(2))));
       if(f) {
-        ns += num;
         var bbbb = Number(document.getElementById('cbp').innerHTML.slice(2));
         avail = avail - (num*bbbb);
         document.getElementById('abl').innerHTML = avail;
@@ -291,30 +289,6 @@
             Stock : ` + document.getElementById('companies').value + `<br>
             Qty : ` + num + `<br>
             Price : ₹ ` + bbbb + `<br>
-            Date : ` + curr_date + `<br>
-        `;
-      }
-    }
-
-    function sellStock() {
-      var num = Number(document.getElementById('stockcount').value);
-      if(num > ns) {
-        alert("Not Enough Stock.");
-        return;
-      }
-      var f = confirm("Sell Stock\nTotal Amount: " + "₹ " + (num*Number(document.getElementById('cbp').innerHTML.slice(2))));
-      if(f) {
-        ns -= num;
-        var bbbb = Number(document.getElementById('cbp').innerHTML.slice(2));
-        avail = avail + (num*bbbb);
-        document.getElementById('abl').innerHTML = avail;
-        b = 1;
-
-        document.getElementById('rt').innerHTML = `
-            Order : Sell <br>
-            Stock : ` + document.getElementById('companies').value + `<br>
-            Qty : ` + num + `<br>
-            At Price : ₹ ` + bbbb + `<br>
             Date : ` + curr_date + `<br>
         `;
       }
