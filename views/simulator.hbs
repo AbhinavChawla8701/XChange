@@ -55,7 +55,7 @@
             <div class="sidebar-submenu">
               <ul>
                 <li>
-                  <a href="#">₹ 2365.00</a>
+                  <a href="#" id="cbp"></a>
                 </li>
               </ul>
             </div>
@@ -68,7 +68,7 @@
             <div class="sidebar-submenu">
               <ul>
                 <li>
-                  <a href="#">₹ 100000.00</a>
+                  <a href="#" id="abl">₹ 100000.00</a>
                 </li>
               </ul>
             </div>
@@ -78,13 +78,26 @@
             <div class="container" style="margin-left: 5px;">
               <input type="number" name="stockcount" id="stockcount" style="width: 90%;" class="form-control">
             </div>
-            <span>Total Amount : </span>
+            {{!-- <span>Total Amount : </span>
             <br>
-            <span>₹ 200.00 </span>
+            <span id="totamt" ></span> --}}
             <br>
             <div class="container" style="margin-left: 5px;">
-              <button class="btn btn-success">Buy</button>
+              <button class="btn btn-success" onclick="buyStock()">Buy</button>
+              &nbsp;&nbsp;&nbsp;
+              <button class="btn btn-danger">Sell</button>
             </div>
+
+          </li>
+          <hr>
+          <li class="header-menu">
+            <span style="font-size: larger; margin-bottom:-100px;">Portfolio :</span>
+            <span id="portfolio" style="margin-top:-100px">₹ 100000.00</span>
+          </li>
+          <li class="header-menu">
+            <span>Recent Transaction : </span>
+            <br>
+            <span id="rt"></span>
 
           </li>
         </ul>
@@ -100,34 +113,81 @@
   </nav>
   <!-- sidebar-wrapper  -->
   <div class="float-container">
+    <h1>TRADING TERMINAL</h1>
     <div class="float-child-chart" id='chart'>
-
+      <label for="startdate">Start Date: </label>
+      <input type="date" name="startdate" id="startdate">
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      <label for="enddate">End Date: </label>
+      <input type="date" name="enddate" id="enddate">
+      <br>
+      <br>
+      <label for="companies">Select Stock : </label>
+      <select id="companies" class="form-select" name="companies"
+        style="width: 50%; display:inline-block; margin-top:-3px">
+        <option value="RELIANCE">Reliance</option>
+        <option value="BAJFINANCE">Bajaj Finance</option>
+        <option value="HINDUNILVR">Hindu Unilever Ltd.</option>
+        <option value="HDFC">HDFC</option>
+        <option value="SBIN">State Bank of India</option>
+        <option value="ITC">ITC Ltd.</option>
+        <option value="MARUTI">Maruti Suzuki India Ltd.</option>
+        <option value="TCS">Tata Consultancy Services Ltd.</option>
+        <option value="INFY">Infosys</option>
+        <option value="HCLTECH">HCL Technologies</option>
+        <option value="HINDALCO">Hindalco Industries Ltd.</option>
+        <option value="ADANITRANS">Adani Transmission Ltd.</option>
+        <option value="ULTRACEMCO">UltraTech Cement Ltd.</option>
+        <option value="NESTLEIND">Nestle India Ltd.</option>
+        <option value="TATASTEEL">TATA Steel</option>
+        <option value="ADANIPORTS">Adani Ports and Special Economic Ltd.</option>
+        <option value="ONGC">Oil and Natural Gas Corporation Ltd.</option>
+        <option value="DABUR">Dabur India Ltd.</option>
+        <option value="BPCL">Bharat Petroleum Corporation Ltd.</option>
+        <option value="YESBANK">Yes Bank</option>
+        <option value="GAIL">GAIL (India) Ltd.</option>
+        <option value="COLPAL">Colgate-Palmolive India Ltd.</option>
+      </select>
+      <button style="display:inline-block" type="button" onclick="changeChart()" class="btn btn-success"><b>View
+          Analysis</b></button>
+      <br>
+      <br>
     </div>
-    <div class = "float-child-line "></div>
+    <div class="float-child-line " ></div>
     <div class="float-child-news" id='news'>
       <div class="card text-center" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Reliance Hit Worst, IT Sectors weakens</h5>
-    <p class="card-text">IT Sector</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
+        <div class="card-body">
+          <h5 class="card-title" id="newsa">Sensex crashed over 1,000 points 14 times in 2020</h5>
+          <p class="card-text" id="sa"></p>
+          <a href="#" class="btn btn-primary" id="linka">View More</a>
+        </div>
+      </div>
+      <br>
+      <br>
 
-<div class="card text-center" style="width: 18rem;">
-  <div class="card-body">
-     <h5 class="card-title">Reliance Hit Worst, IT Sectors weakens</h5>
-    <p class="card-text">IT Sector</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
+      <div class="card text-center" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title" id="newsb">The big risk for Indian stock market rally</h5>
+          <p class="card-text" id="sb"></p>
+          <a href="#" class="btn btn-primary" id="linkb">View More</a>
+        </div>
+      </div>
+      <br>
+      <br>
 
-<div class="card text-center" style="width: 18rem;">
-  <div class="card-body">
-     <h5 class="card-title">Reliance Hit Worst, IT Sectors weakens</h5>
-    <p class="card-text">IT Sector</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
+      <div class="card text-center" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title" id="newsc">Reliance Hit Worst, IT Sectors weakens</h5>
+          <p class="card-text" id="sc"></p>
+          <a href="#" class="btn btn-primary" id="linkc">View More</a>
+        </div>
+      </div>
+      <br>
+      <br>
     </div>
   </div>
   <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
@@ -178,7 +238,7 @@
     const candleSeries = chart.addCandlestickSeries();
 
     var cdata;
-
+    var flag = true;
     async function Chart() {
       for (i = 1; i < 365; i++) {
         if (i == 1) {
@@ -197,17 +257,103 @@
             .then(res => res.json())
             .then(data => {
               cdata = data.map(d => {
-                console.log(d.Open_Price);
                 return { time: d.Date, open: parseFloat(d.Open_Price), high: parseFloat(d.High_Price), low: parseFloat(d.Low_Price), close: parseFloat(d.Close_Price) }
               });
               candleSeries.setData(cdata);
             })
             .catch(err => log(err))
         }
+        if(!flag) {
+          break;
+        }
         await sleep(500);
       }
     }
     Chart();
+    var b = 0;
+    var avail = 100000;
+    var ns = 0;
+    var curr_date = "";
+    function buyStock() {
+      var num = Number(document.getElementById('stockcount').value);
+      ns += num;
+      var f = confirm("Buy Stock\nTotal Amount: " + "₹ " + (num*Number(document.getElementById('cbp').innerHTML.slice(2))));
+      if(f) {
+        var bbbb = Number(document.getElementById('cbp').innerHTML.slice(2));
+        avail = avail - (num*bbbb);
+        document.getElementById('abl').innerHTML = avail;
+        b = 1;
+
+        document.getElementById('rt').innerHTML = `
+            Order : Buy <br>
+            Stock : ` + document.getElementById('companies').value + `<br>
+            Qty : ` + num + `<br>
+            Price : ₹ ` + bbbb + `<br>
+            Date : ` + curr_date + `<br>
+        `;
+      }
+    }
+
+    async function changeChart() {
+      flag = false;
+      var sd = document.getElementById('startdate').value;
+      var ed = document.getElementById('enddate').value;
+      var stock = document.getElementById('companies').value;
+
+      var d = new Date(sd);
+      var syear = d.getFullYear();
+      var smonth = (d.getMonth() + 1) + "";
+      smonth = smonth.length < 2 ? "0" + smonth : smonth;
+      var sday = d.getDate() + "";
+      sday = sday.length < 2 ? "0" + sday : sday;
+
+      var startdate = syear + "-" + smonth + "-" + sday;
+
+      for (d = new Date(sd); d <= new Date(ed); d.setDate(d.getDate() + 1)) {
+        var year = d.getFullYear();
+        var month = (d.getMonth() + 1) + "";
+        month = month.length < 2 ? "0" + month : month;
+        var day = d.getDate() + "";
+        day = day.length < 2 ? "0" + day : day;
+
+        var str = year + "-" + month + "-" + day;
+        curr_date = str;
+        fetch(`http://localhost:9000/getdata/` + startdate + '/' + str + '/' + stock)
+          .then(res => res.json())
+          .then(data => {
+            cdata = data.map(d => {
+              document.getElementById('cbp').innerHTML = "₹ " + d.Last_Price;
+              // cbp*num + avail
+              var n = d.Last_Price*ns + avail;
+              n = n.toFixed(2);
+
+              document.getElementById('portfolio').innerHTML = "₹ " + n; //+ port;
+              return { time: d.Date, open: parseFloat(d.Open_Price), high: parseFloat(d.High_Price), low: parseFloat(d.Low_Price), close: parseFloat(d.Close_Price) }
+            });
+            candleSeries.setData(cdata);
+          })
+          .catch(err => log(err))
+
+          fetch(`http://localhost:9000/getnews/`)
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+            
+            document.getElementById("newsa").innerHTML=data.newsa.Title;
+            document.getElementById("linka").href=data.newsa.Links;
+            document.getElementById("newsb").innerHTML=data.newsb.Title;
+            document.getElementById("linkb").href=data.newsb.Links;
+            document.getElementById("newsc").innerHTML=data.newsc.Title;
+            document.getElementById("linkc").href=data.newsc.Links;
+            document.getElementById("sa").innerHTML=data.nra;
+            document.getElementById("sb").innerHTML=data.nrb;
+            document.getElementById("sc").innerHTML=data.nrc;
+          })
+          .catch(err => log(err))
+        await sleep(2000);
+      }
+    }
+
 
   </script>
 </div>

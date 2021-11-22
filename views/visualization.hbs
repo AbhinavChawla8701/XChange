@@ -27,6 +27,11 @@
         <option value="BSE:COLPAL">Colgate-Palmolive India Ltd.</option>
       </select>
         </div>
+
+        <br>
+        <br>
+        <button id="get_data" onclick="getData()" class="btn btn-primary" style="margin-left: 5%;">Get Data</button>
+        
       </section>
 
       <div
@@ -36,10 +41,10 @@
         <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
-  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/RELIANCE/" rel="noopener" target="_blank"><span class="blue-text">RELIANCE Profile</span></a></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/{{stockwithoutBSE}}/" rel="noopener" target="_blank"><span class="blue-text">{{stockwithoutBSE}} Profile</span></a></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js" async>
   {
-  "symbol": "RELIANCE",
+  "symbol": "{{stockwithoutBSE}}",
   "width": 1300,
   "height": 350,
   "colorTheme": "light",
@@ -56,14 +61,14 @@
     <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
   <div id="tradingview_c5169"></div>
-  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BSE-RELIANCE/" rel="noopener" target="_blank"><span class="blue-text">RELIANCE Chart</span></a> </div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BSE-{{stockwithoutBSE}}/" rel="noopener" target="_blank"><span class="blue-text">{{stockwithoutBSE}} Chart</span></a> </div>
   <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
   <script type="text/javascript">
   new TradingView.widget(
   {
   "width": 1300,
   "height": 610,
-  "symbol": "BSE:RELIANCE",
+  "symbol": "BSE:{{stockwithoutBSE}}",
   "interval": "D",
   "timezone": "Etc/UTC",
   "theme": "light",
@@ -90,14 +95,14 @@
            <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
-  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BSE-RELIANCE/technicals/" rel="noopener" target="_blank"><span class="blue-text">Technical Analysis for RELIANCE</span></a></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BSE-{{stockwithoutBSE}}/technicals/" rel="noopener" target="_blank"><span class="blue-text">Technical Analysis for {{stockwithoutBSE}}</span></a></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
   {
   "interval": "1m",
   "width": 600,
   "isTransparent": false,
   "height": 450,
-  "symbol": "BSE:RELIANCE",
+  "symbol": "BSE:{{stockwithoutBSE}}",
   "showIntervalTabs": true,
   "locale": "en",
   "colorTheme": "light"
@@ -119,10 +124,10 @@
             <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
-  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BSE-RELIANCE/" rel="noopener" target="_blank"><span class="blue-text">RELIANCE Quotes</span></a></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BSE-{{stockwithoutBSE}}/" rel="noopener" target="_blank"><span class="blue-text">{{stockwithoutBSE}} Quotes</span></a></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
   {
-  "symbol": "BSE:RELIANCE",
+  "symbol": "BSE:{{stockwithoutBSE}}",
   "width": 630,
   "height": 450,
   "locale": "en",
@@ -153,17 +158,17 @@
       
     </div>
   </div>
-  <div class="col" style="margin-left:145px;width:22rem;">
+  <div class="col" style="margin-left:105px;width:22rem;">
     <div class="card h-100">
      
       <div class="card-body">
-        <h5 class="card-title">52-Week low</h5>
+        <h5 class="card-title">52-Week Low</h5>
         <p class="card-text" style="font-weight: bold;font-size:45px">₹ 1830</p>
       </div>
       
     </div>
   </div>
-  <div class="col" style="margin-left:125px;margin-right:35px;width:22rem;">
+  <div class="col" style="margin-left:125px;margin-right:3px;width:22rem;">
     <div class="card h-100">
      
       <div class="card-body">
@@ -177,4 +182,12 @@
 
     </main>
 
+<script type="text/javascript">
 
+function getData()
+{
+  var company=document.getElementById("companies").value.slice(4);
+  window.location.replace("/visual/"+company);
+  document.getElementById("companies").value=company;
+}
+</script>

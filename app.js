@@ -28,6 +28,7 @@ mongoose.connect(uri)
 
 global.User = require('./models/user');
 global.Stock = require('./models/stock');
+global.News = require('./models/news');
 
 var app = express();
 
